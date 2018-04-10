@@ -5,16 +5,21 @@ export class ShoppingListService {
   ingredientsChanged = new EventEmitter<Ingredient[]>();
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
-    new Ingredient('Tomatos', 10),
-    new Ingredient('Potatos', 3),
+    new Ingredient('Tomatoes', 10),
+    new Ingredient('Potatoes', 3),
   ];
 
   getIngredients() {
     return this.ingredients.slice();
   }
 
-  addIngerdient(ingredient: Ingredient) {
+  addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
+    this.ingredientsChanged.emit(this.ingredients.slice());
+  }
+
+  addIngredients(ingredients: Ingredient[]) {
+    this.ingredients.push(...ingredients);
     this.ingredientsChanged.emit(this.ingredients.slice());
   }
 }
