@@ -18,7 +18,7 @@ export class DataStorageService {
     const token = this.authService.getToken();
 
     return this.http.put(
-      'https://angular-project-dcdc7.firebaseio.com/recipes.json?auth=' + token,
+      'https://angular-project-16d36.firebaseio.com/recipes.json?auth=' + token,
       this.recipeService.getRecipes()
     );
   }
@@ -26,7 +26,7 @@ export class DataStorageService {
   getRecipes() {
     const token = this.authService.getToken();
 
-    this.http.get('https://angular-project-dcdc7.firebaseio.com/recipes.json?auth=' + token)
+    this.http.get('https://angular-project-16d36.firebaseio.com/recipes.json?auth=' + token)
       .pipe(map(
         (recipes: Recipe[]) => {
           for (const recipe of recipes) {
