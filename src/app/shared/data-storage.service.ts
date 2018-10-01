@@ -31,7 +31,6 @@ export class DataStorageService {
         (recipes: Recipe[]) => {
           for (const recipe of recipes) {
             if (!recipe['ingredients']) {
-              console.log(recipe);
               recipe['ingredients'] = [];
             }
           }
