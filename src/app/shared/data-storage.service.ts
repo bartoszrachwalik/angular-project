@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import {RecipeService} from '../recipes/recipe.service';
 import {Recipe} from '../recipes/recipe.model';
@@ -16,17 +16,28 @@ export class DataStorageService {
 
   storeRecipes() {
     const token = this.authService.getToken();
+    // const headers = new HttpHeaders().set('Authorization', 'Bearer example');
 
     return this.http.put(
       'https://angular-project-16d36.firebaseio.com/recipes.json?auth=' + token,
-      this.recipeService.getRecipes()
+      this.recipeService.getRecipes(), {
+        // headers: headers
+        // params: new HttpParams().set('auth', token),
+        // observe: 'events'
+      }
     );
   }
 
   getRecipes() {
     const token = this.authService.getToken();
 
-    this.http.get('https://angular-project-16d36.firebaseio.com/recipes.json?auth=' + token)
+    this.http.get('https://angular-project-16d36.firebaseio.com/recipes.json?auth=' + token,
+      // {
+      //   // overwrites body with full response and treats it as a text
+      //   observe: 'response',
+      //   responseType: 'text'
+      // }
+    )
       .pipe(map(
         (recipes: Recipe[]) => {
           for (const recipe of recipes) {
